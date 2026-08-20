@@ -1,0 +1,34 @@
+name: Test specific version - install pinned reviewdog version
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: setup
+        name: Setup reviewdog (v0.20.3)
+        uses: .
+        with:
+          reviewdog_version: v0.20.3
+
+      - name: Assert reviewdog is installed and executable
+        run: |
+          echo "Checking reviewdog is on PATH..."
+          if ! command -v reviewdog > /dev/null 2>&1; then
+            echo "FAIL: reviewdog command not found on PATH"
+            exit 1
+          fi
+          echo "PASS: reviewdog found at $(command -v reviewdog)"
+
+      - name: Assert reviewdog version matches requested version
+        run: |
+          VERSION_OUTPUT=$(reviewdog --version 2>&1 || true)
+          echo "reviewdog version output: $VERSION_OUTPUT"
+          if echo "$VERSION_OUTPUT" | grep -q "0.20.3"; then
+            echo "PASS: reviewdog version 0.20.3 confirmed"
+          else
+            echo "FAIL: expected version 0.20.3 in output, got: $VERSION_OUTPUT"
+            exit 1
+          fi
