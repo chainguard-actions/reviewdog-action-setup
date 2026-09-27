@@ -9,6 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v1 | [`v1`](https://github.com/chainguard-actions/reviewdog-action-setup/tree/v1) | [`d8a7baa`](https://github.com/reviewdog/action-setup/commit/d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f) |
+| v1.4.0 | [`v1.4.0`](https://github.com/chainguard-actions/reviewdog-action-setup/tree/v1.4.0) | [`d8edfce`](https://github.com/reviewdog/action-setup/commit/d8edfce3dd5e1ec6978745e801f9c50b5ef80252) |
 | v1.5 | [`v1.5`](https://github.com/chainguard-actions/reviewdog-action-setup/tree/v1.5) | [`d8a7baa`](https://github.com/reviewdog/action-setup/commit/d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f) |
 | v1.5.0 | [`v1.5.0`](https://github.com/chainguard-actions/reviewdog-action-setup/tree/v1.5.0) | [`d8a7baa`](https://github.com/reviewdog/action-setup/commit/d8a7baabd7f3e8544ee4dbde3ee41d0011c3a93f) |
 
