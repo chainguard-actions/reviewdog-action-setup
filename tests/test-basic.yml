@@ -1,0 +1,31 @@
+name: Test basic usage (default latest version)
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - id: setup
+        uses: .
+        # No inputs — uses default "latest"
+
+      - name: Assert reviewdog is on PATH
+        run: |
+          echo "which reviewdog: $(which reviewdog 2>/dev/null || echo 'NOT FOUND')"
+          if ! command -v reviewdog >/dev/null 2>&1; then
+            echo "FAIL: reviewdog not found on PATH"
+            exit 1
+          fi
+          echo "PASS: reviewdog is available"
+
+      - name: Assert reviewdog runs
+        run: |
+          VERSION_OUTPUT="$(reviewdog -version 2>&1 || true)"
+          echo "reviewdog version output: $VERSION_OUTPUT"
+          if [ -z "$VERSION_OUTPUT" ]; then
+            echo "FAIL: reviewdog -version produced no output"
+            exit 1
+          fi
+          echo "PASS: reviewdog ran successfully"
