@@ -37,6 +37,7 @@ runs:
         set -eu
         "$GITHUB_ACTION_PATH/check-installed.sh"
       shell: sh
+
 # Ref: https://haya14busa.github.io/github-action-brandings/
 branding:
   icon: "terminal"

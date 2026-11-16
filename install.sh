@@ -32,7 +32,18 @@ else
   echo "curl or wget is required" >&2
   exit 1
 fi
+# Verify the downloaded installer before executing it.
+if [ ! -s "${INSTALL_SCRIPT_FILE}" ]; then
+  echo "Downloaded reviewdog installer is empty" >&2
+  exit 1
+fi
+if ! head -n 1 "${INSTALL_SCRIPT_FILE}" | grep -q '^#!'; then
+  echo "Downloaded reviewdog installer does not look like a shell script" >&2
+  exit 1
+fi
 sh "${INSTALL_SCRIPT_FILE}" -b "${TEMP}/reviewdog/bin" "${VERSION}" 2>&1
+rm -f "${INSTALL_SCRIPT_FILE}"
 echo '::endgroup::'
 
-echo "${TEMP}/reviewdog/bin" >>"${GITHUB_PATH}"
+safe_path=$(printf '%s' "${TEMP}/reviewdog/bin" | tr -d '\n\r')
+echo "${safe_path}" >>"${GITHUB_PATH}"
